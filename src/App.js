@@ -1,5 +1,6 @@
 import { Component } from "react";
 import DynamicForm from "./DynamicForm.js";
+
 import "./App.css";
 
 class App extends Component {
@@ -52,7 +53,7 @@ class App extends Component {
     return (
       <div>
         <DynamicForm
-          classname="DynamicForm"
+          className="container-center"
           title="Registration"
           model={[
             {
