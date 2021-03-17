@@ -78,7 +78,7 @@ class App extends Component {
               label: "test field",
               props: { required: false },
               defaultValue: "test value",
-              placeholderText: "placeholder text",
+              placeholder: "placeholder text",
             },
             {
               key: "dropdown",
@@ -86,11 +86,18 @@ class App extends Component {
               label: "test field",
               props: { required: false },
               defaultValue: "1",
-              placeholderText: "placeholder text",
+              placeholder: "placeholder text",
               options: [
                 { key: 1, value: "1" },
                 { key: 2, value: "2" },
               ],
+            },
+            {
+              type: "text",
+              label: "test field",
+              required: false,
+              defaultValue: "1",
+              placeholderText: "placeholder text",
             },
           ]}
           onSubmit={(model) => this.onSubmit(model)}
