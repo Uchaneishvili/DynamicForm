@@ -49,7 +49,7 @@ function App() {
         type: "text",
         label: "test field",
         required: false,
-        defaultValue: "1",
+        defaultValue: "default",
         placeholderText: "placeholder text",
       },
     ],

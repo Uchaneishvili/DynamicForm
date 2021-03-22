@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 function DynamicForm(props) {
+  function handleChange(event) {
+    console.log(event.target.value);
+  }
+
   const generateInput = (m) => {
     switch (m.type) {
       case "text":
@@ -13,6 +17,7 @@ function DynamicForm(props) {
               placeholder={m.placeholder}
               defaultValue={m.defaultValue}
               required={m.required}
+              onChange={handleChange}
             />
           </>
         );
@@ -26,6 +31,7 @@ function DynamicForm(props) {
               placeholder={m.placeholder}
               defaultValue={m.defaultValue}
               required={m.required}
+              onChange={handleChange}
             />
           </>
         );
@@ -39,6 +45,7 @@ function DynamicForm(props) {
               placeholder={m.placeholder}
               defaultValue={m.defaultValue}
               required={m.required}
+              onChange={handleChange}
             />
           </>
         );
