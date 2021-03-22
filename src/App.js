@@ -3,11 +3,12 @@ import DynamicForm from "./DynamicForm.js";
 
 import "./App.css";
 
-class App extends Component {
-  form = {
-    form: "test form",
+function App() {
+  const form = {
+    title: "test form",
     fields: [
       {
+        id: 1,
         type: "text",
         label: "test field",
         required: true,
@@ -15,6 +16,7 @@ class App extends Component {
         placeholderText: "placeholder text",
       },
       {
+        id: 2,
         type: "number",
         label: "test field",
         required: false,
@@ -22,6 +24,7 @@ class App extends Component {
         placeholderText: "placeholder text",
       },
       {
+        id: 3,
         type: "textarea",
         label: "test field",
         required: false,
@@ -29,17 +32,20 @@ class App extends Component {
         placeholderText: "placeholder text",
       },
       {
+        id: 4,
         type: "dropdown",
         label: "test field",
         required: false,
         defaultValue: "1",
         placeholderText: "placeholder text",
         options: [
-          { key: 1, value: "1" },
+          { key: 1, value: "option1" },
           { key: 2, value: "2" },
+          { key: 3, value: "2222" },
         ],
       },
       {
+        id: 5,
         type: "text",
         label: "test field",
         required: false,
@@ -49,62 +55,20 @@ class App extends Component {
     ],
   };
 
-  render() {
-    return (
-      <div>
-        <DynamicForm
-          className="container-center"
-          title="Registration"
-          model={[
-            {
-              key: "number",
-              type: "number",
-              placeholder: "placeholder text",
-              label: "test field",
-              defaultValue: "3",
-              props: { required: true },
-            },
-            {
-              key: "name",
-              type: "text",
-              placeholder: "placeholder text",
-              label: "test field",
-              defaultValue: "test value",
-              props: { required: false },
-            },
-            {
-              key: "text",
-              type: "textarea",
-              label: "test field",
-              props: { required: false },
-              defaultValue: "test value",
-              placeholder: "placeholder text",
-            },
-            {
-              key: "dropdown",
-              type: "dropdown",
-              label: "test field",
-              props: { required: false },
-              defaultValue: "1",
-              placeholder: "placeholder text",
-              options: [
-                { key: 1, value: "1" },
-                { key: 2, value: "2" },
-              ],
-            },
-            {
-              type: "text",
-              label: "test field",
-              required: false,
-              defaultValue: "1",
-              placeholderText: "placeholder text",
-            },
-          ]}
-          onSubmit={(model) => this.onSubmit(model)}
-        />
-      </div>
-    );
-  }
+  const onSubmit = (model) => {
+    console.log("test");
+  };
+
+  return (
+    <div>
+      <DynamicForm
+        className="container-center"
+        title={form.title}
+        model={form.fields}
+        onSubmit={onSubmit}
+      />
+    </div>
+  );
 }
 
 export default App;

@@ -1,133 +1,86 @@
 import React from "react";
 
-export default class DynamicForm extends React.Component {
-  formMap = () => {
-    let model = this.props.model;
-
-    let formUi = model.map((m) => {
-      if (m.type === "text") {
-        if (m.required == "true") {
-          return (
-            <div className="attrContainer">
-              <div className="returnAttr">
-                <label className="form-label">{m.label}</label>
-                <input
-                  className="form-control numberInput"
-                  type={m.type}
-                  placeholder={m.placeholder}
-                  defaultValue={m.defaultValue}
-                  required
-                />
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div className="attrContainer">
-              <div className="returnAttr">
-                <label className="form-label">{m.label}</label>
-                <input
-                  className="form-control numberInput"
-                  type={m.type}
-                  placeholder={m.placeholder}
-                  defaultValue={m.defaultValue}
-                />
-              </div>
-            </div>
-          );
-        }
-      } else if (m.type === "number") {
-        if (m.required == "true") {
-          return (
-            <div className="attrContainer">
-              <div className="returnAttr">
-                <label className="form-label">{m.label}</label>
-                <input
-                  className="form-control numberInput"
-                  type={m.type}
-                  placeholder={m.placeholder}
-                  defaultValue={m.defaultValue}
-                  required
-                />
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div className="attrContainer">
-              <div className="returnAttr">
-                <label className="form-label">{m.label}</label>
-                <input
-                  className="form-control numberInput"
-                  type={m.type}
-                  placeholder={m.placeholder}
-                  defaultValue={m.defaultValue}
-                />
-              </div>
-            </div>
-          );
-        }
-      } else if (m.type === "textarea") {
-        if (m.required == "true") {
-          return (
-            <div className="attrContainer">
-              <div className="returnAttr">
-                <label className="form-label">{m.label}</label>
-                <textarea
-                  className="form-control textareaInput"
-                  type={m.type}
-                  placeholder={m.placeholder}
-                  defaultValue={m.defaultValue}
-                  required
-                />
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div className="attrContainer">
-              <div className="returnAttr">
-                <label className="form-label">{m.label}</label>
-                <textarea
-                  className="form-control textareaInput"
-                  type={m.type}
-                  placeholder={m.placeholder}
-                  defaultValue={m.defaultValue}
-                />
-              </div>
-            </div>
-          );
-        }
-      } else if (m.type === "dropdown") {
+function DynamicForm(props) {
+  const generateInput = (m) => {
+    switch (m.type) {
+      case "text":
         return (
-          <div className="attrContainer">
-            <div className="returnAttr">
-              <label>{m.label}</label>
-              <select
-                className="form-control dropdown"
-                defaultValue={m.defaultValue}
-              >
-                <option>test</option>
-                <option>test</option>
-              </select>
-            </div>
-          </div>
+          <>
+            <label className="form-label">{m.label}</label>
+            <input
+              className="form-control numberInput"
+              type={m.type}
+              placeholder={m.placeholder}
+              defaultValue={m.defaultValue}
+              required={m.required}
+            />
+          </>
         );
-      }
-      return <div key={m.key}></div>;
-    });
-    return formUi;
+      case "number":
+        return (
+          <>
+            <label className="form-label">{m.label}</label>
+            <input
+              className="form-control numberInput"
+              type={m.type}
+              placeholder={m.placeholder}
+              defaultValue={m.defaultValue}
+              required={m.required}
+            />
+          </>
+        );
+      case "textarea":
+        return (
+          <>
+            <label className="form-label">{m.label}</label>
+            <textarea
+              className="form-control textareaInput"
+              type={m.type}
+              placeholder={m.placeholder}
+              defaultValue={m.defaultValue}
+              required={m.required}
+            />
+          </>
+        );
+      case "dropdown":
+        return (
+          <>
+            <label>{m.label}</label>
+            <select
+              className="form-control dropdown"
+              defaultValue={m.defaultValue}
+            >
+              {m.options.map((option) => {
+                return <option key={option.key}>{option.value}</option>;
+              })}
+            </select>
+          </>
+        );
+
+      default:
+        break;
+    }
   };
 
-  render() {
-    let title = this.props.title || "Dynamic Form";
+  const submitForm = () => {};
 
-    return (
-      <div className={this.props.className}>
-        <h1>{title}</h1>
-        {this.formMap()}
-        <button className="btn btn-success">Submit</button>
-      </div>
-    );
-  }
+  return (
+    <div className={props.className}>
+      <h1>{props.title}</h1>
+      {props.model.map((field) => {
+        console.log(field);
+
+        return (
+          <div className="attrContainer" key={field.id}>
+            <div className="returnAttr">{generateInput(field)}</div>
+          </div>
+        );
+      })}
+      <button className="btn btn-success" onClick={() => submitForm()}>
+        Submit
+      </button>
+    </div>
+  );
 }
+
+export default DynamicForm;
